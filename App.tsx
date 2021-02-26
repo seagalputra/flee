@@ -1,14 +1,13 @@
-import React from 'react';
-import {StyleSheet, View, Text, Button, TouchableOpacity} from 'react-native';
+import React, {ReactNode} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
-const HomeScreen = ({navigation}) => {
-  const {text} = styles;
-
-  const renderContent = () => {
+const HomeScreen: React.FC = ({navigation}: any) => {
+  const renderContent = (): ReactNode => {
     return (
       <View
         style={{
@@ -34,7 +33,7 @@ const HomeScreen = ({navigation}) => {
     );
   };
 
-  const renderHeader = () => (
+  const renderHeader = (): ReactNode => (
     <View
       style={{
         backgroundColor: 'white',
@@ -48,7 +47,7 @@ const HomeScreen = ({navigation}) => {
           width: 40,
           height: 8,
           borderRadius: 4,
-          backgroundColor: '#333333',
+          backgroundColor: '#efefef',
           marginBottom: 10,
         }}
       />
@@ -60,6 +59,16 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{flex: 1}}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
       <BottomSheet
         ref={sheetRef}
         snapPoints={[450, 200]}
