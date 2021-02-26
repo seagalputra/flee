@@ -1,117 +1,111 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, View, Text, Button, TouchableOpacity} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import BottomSheet from 'reanimated-bottom-sheet';
+import Animated from 'react-native-reanimated';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const HomeScreen = ({navigation}) => {
+  const {text} = styles;
 
-declare const global: {HermesInternal: null | {}};
+  const renderContent = () => {
+    return (
+      <View
+        style={{
+          backgroundColor: 'white',
+          padding: 16,
+          height: '100%',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'red',
+            borderRadius: 10,
+            padding: 16,
+            width: '100%',
+            alignItems: 'center',
+          }}
+          onPress={() => navigation.navigate('Details')}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>
+            Open Details Screen
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
-const App = () => {
+  const renderHeader = () => (
+    <View
+      style={{
+        backgroundColor: 'white',
+        alignItems: 'center',
+        paddingTop: 20,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+      }}>
+      <View
+        style={{
+          width: 40,
+          height: 8,
+          borderRadius: 4,
+          backgroundColor: '#333333',
+          marginBottom: 10,
+        }}
+      />
+    </View>
+  );
+
+  const sheetRef: React.Ref<any> = React.createRef();
+  const fall = new Animated.Value(1);
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change
-                this screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={[450, 200]}
+        renderContent={renderContent}
+        renderHeader={renderHeader}
+        initialSnap={1}
+        callbackNode={fall}
+        enabledGestureInteraction={true}
+      />
     </>
   );
 };
 
+const DetailsScreen = () => {
+  const {text} = styles;
+
+  return (
+    <View style={text}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+};
+
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  text: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
