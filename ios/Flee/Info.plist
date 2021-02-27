@@ -37,8 +37,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Track user location for running activity when application in the background</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Track user location while application is running on the background</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track user location for running activity</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

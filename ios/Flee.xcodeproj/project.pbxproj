@@ -19,6 +19,7 @@
 		992FEE5EE2DA3C5003DB32CE /* libPods-Flee-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C4217C0EAFBFCA1D72C1EA /* libPods-Flee-tvOSTests.a */; };
 		A3F312B9A8B21A25F2C61229 /* libPods-Flee-FleeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB602E4119B3DC02CC1501B /* libPods-Flee-FleeTests.a */; };
 		A8629EE08911D232E930F549 /* libPods-Flee-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A7019301335E288C088E4E /* libPods-Flee-tvOS.a */; };
+		D57D661425EA2AED005EBA4D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D661325EA2AED005EBA4D /* Location.swift */; };
 		D60ADC90579247BAF6A82845 /* libPods-Flee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFF179D28F71AA5F89D4F8F /* libPods-Flee.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		9EB602E4119B3DC02CC1501B /* libPods-Flee-FleeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flee-FleeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4A7019301335E288C088E4E /* libPods-Flee-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flee-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C770ED6FBAF3A598DACF7D3D /* Pods-Flee-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flee-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Flee-tvOSTests/Pods-Flee-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		D57D661225EA2AEC005EBA4D /* Flee-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flee-Bridging-Header.h"; sourceTree = "<group>"; };
+		D57D661325EA2AED005EBA4D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F7A88C9245CE70F52137CAAC /* Pods-Flee-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flee-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Flee-tvOS/Pods-Flee-tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				D57D661325EA2AED005EBA4D /* Location.swift */,
+				D57D661225EA2AEC005EBA4D /* Flee-Bridging-Header.h */,
 			);
 			name = Flee;
 			sourceTree = "<group>";
@@ -161,7 +166,6 @@
 				6D164DD29F245E6FE52C1375 /* Pods-Flee-tvOSTests.debug.xcconfig */,
 				C770ED6FBAF3A598DACF7D3D /* Pods-Flee-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -296,7 +300,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1240;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -675,6 +679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				D57D661425EA2AED005EBA4D /* Location.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,6 +721,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EF7F079A048708562D7BFE0 /* Pods-Flee-FleeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -739,6 +745,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42A214D73418C28CB21B77A4 /* Pods-Flee-FleeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = FleeTests/Info.plist;
@@ -772,6 +779,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Flee;
+				SWIFT_OBJC_BRIDGING_HEADER = "Flee-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -794,6 +802,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Flee;
+				SWIFT_OBJC_BRIDGING_HEADER = "Flee-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
