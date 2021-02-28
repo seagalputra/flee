@@ -1,55 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, SectionList, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Ionicon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
+import useHistoryApi, { History } from '../hooks/useHistoryApi';
 
-import { getHistories } from '../api/HistoryApi';
-
-type History = {
-  title: string;
-  data: Array<string>;
-};
-
-const HistoryScreen = ({ navigation }: any) => {
-  const initialHistory: History[] = [];
-  const [histories, setHistories]: [
-    History[],
-    React.Dispatch<React.SetStateAction<History[]>>,
-  ] = useState(initialHistory);
-
-  useEffect(() => {
-    getHistories().then((data) => setHistories(data));
-  }, []);
-
-  const toHome = () => navigation.navigate('Home');
+const HistoryScreen = () => {
+  const histories: History[] = useHistoryApi();
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'baseline',
-          paddingTop: 24,
-          paddingLeft: 16,
-          paddingRight: 16,
-          paddingBottom: 24,
-        }}>
-        <TouchableOpacity onPress={toHome}>
-          <Ionicon name="arrow-back" size={24} />
-        </TouchableOpacity>
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: 'bold',
-            color: '#0E0F0F',
-            marginLeft: 16,
-          }}>
-          Running History
-        </Text>
-      </View>
       <SectionList
         sections={histories}
-        renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
+        renderItem={({ item, index, section }) => {
+          if (index === 0) {
+            return (
+              <Text
+                style={{
+                  ...styles.item,
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
+                }}>
+                {item}
+              </Text>
+            );
+          }
+          if (index === section.data.length - 1) {
+            return (
+              <Text
+                style={{
+                  ...styles.item,
+                  borderBottomLeftRadius: 10,
+                  borderBottomRightRadius: 10,
+                  marginBottom: 16,
+                }}>
+                {item}
+              </Text>
+            );
+          } else {
+            return <Text style={styles.item}>{item}</Text>;
+          }
+        }}
         renderSectionHeader={({ section }) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
         )}
@@ -64,18 +52,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
+    marginTop: 8,
+    marginBottom: 16,
+    marginHorizontal: 16,
+    fontSize: 21,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
-    padding: 10,
+    backgroundColor: '#FFFFFF',
+    padding: 16,
     fontSize: 18,
-    height: 44,
+    marginLeft: 16,
+    marginRight: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
 });
 
