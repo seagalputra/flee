@@ -11,7 +11,7 @@ import {
 import MapView, {
   PROVIDER_GOOGLE,
   Region,
-  Marker,
+  MarkerAnimated,
   Polyline,
   LatLng,
 } from 'react-native-maps';
@@ -145,6 +145,7 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
           longitudeDelta: currentLocation.longitudeDelta,
         }}
         customMapStyle={mapStyle}
+        followsUserLocation
         showsMyLocationButton={false}>
         {isTimerActive ? (
           <Polyline
@@ -153,13 +154,13 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
             strokeWidth={4}
           />
         ) : null}
-        <Marker
+        <MarkerAnimated
           coordinate={{
             latitude: currentLocation.latitude,
             longitude: currentLocation.longitude,
           }}>
           <Ionicon name="location" size={24} />
-        </Marker>
+        </MarkerAnimated>
       </MapView>
       <View style={styles.menuContainer}>
         <View style={styles.menuDetails}>

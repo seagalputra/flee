@@ -17,18 +17,43 @@ const HistoryScreen = () => {
     borderBottomRightRadius: 10,
     marginBottom: 16,
   };
+  const getMinutes = (time: number): number => Math.floor(time / 60);
+  const getSeconds = (time: number): string => ('0' + (time % 60)).slice(-2);
 
   return (
     <View style={styles.container}>
       <SectionList
         sections={histories}
         renderItem={({ item, index, section }) => {
+          const listItem = (
+            <View style={styles.menuDetails}>
+              <View>
+                <Text style={styles.menuTitle}>Time</Text>
+                <Text style={styles.menuBody}>
+                  {getMinutes(item.time)}:{getSeconds(item.time)}
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.menuTitle}>Distance</Text>
+                <Text style={styles.menuBody}>
+                  {item.distance === 0 ? '--' : item.distance} km
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.menuTitle}>Calories</Text>
+                <Text style={styles.menuBody}>
+                  {item.calories === 0 ? '--' : item.calories}
+                </Text>
+              </View>
+            </View>
+          );
+
           if (index === 0) {
-            return <Text style={itemStartStyle}>{item}</Text>;
+            return <View style={itemStartStyle}>{listItem}</View>;
           } else if (index === section.data.length - 1) {
-            return <Text style={itemEndStyle}>{item}</Text>;
+            return <View style={itemEndStyle}>{listItem}</View>;
           } else {
-            return <Text style={styles.item}>{item}</Text>;
+            return <View style={styles.item}>{listItem}</View>;
           }
         }}
         renderSectionHeader={({ section }) => (
@@ -65,6 +90,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+  },
+  menuDetails: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+  },
+  menuTitle: { fontWeight: 'bold', fontSize: 14, color: '#c6c6c6' },
+  menuBody: { fontWeight: 'bold', fontSize: 21, color: '#0E0F0F' },
+  menuSeparator: {
+    borderRightWidth: 1,
+    borderRightColor: '#efefef',
   },
 });
 

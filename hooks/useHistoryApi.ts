@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react';
 
 export type History = {
   title: string;
-  data: Array<string>;
+  data: Array<Run>;
+};
+
+export type Run = {
+  time: number;
+  distance: number;
+  calories: number;
 };
 
 const data: History[] = [
-  { title: '28 Feb 2021', data: ['Devin', 'Dan', 'Dominic'] },
   {
-    title: '27 Feb 2021',
-    data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'],
+    title: '28 Feb 2021',
+    data: [
+      { time: 600, distance: 5, calories: 10 },
+      { time: 600, distance: 5, calories: 10 },
+    ],
   },
 ];
 
