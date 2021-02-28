@@ -13,10 +13,10 @@ export type Run = {
 
 const data: History[] = [
   {
-    title: '28 Feb 2021',
+    title: 'Feb 28, 2021',
     data: [
       { time: 600, distance: 5, calories: 10 },
-      { time: 600, distance: 5, calories: 10 },
+      { time: 300, distance: 5, calories: 10 },
     ],
   },
 ];

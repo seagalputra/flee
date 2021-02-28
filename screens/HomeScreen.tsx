@@ -18,9 +18,11 @@ import MapView, {
 import Geolocation from 'react-native-geolocation-service';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { getPreciseDistance } from 'geolib';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../components/Button';
 
+import { Run } from '../hooks/useHistoryApi';
 import mapStyle from '../mapStyle.json';
 
 type Location = Region & { coordinates: LatLng[] };
@@ -124,6 +126,21 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
     setIsTimerActive(false);
     setTimer(0);
     setDistance(0);
+
+    const history = {
+      time: timer,
+      distance,
+      calories: 0,
+    };
+
+    AsyncStorage.getItem('@history').then((histories: string | null) => {
+      if (histories != null) {
+        const jsonValue: Run[] = JSON.parse(histories);
+        const jsonString: string = JSON.stringify([...jsonValue, history]);
+
+        AsyncStorage.setItem('@history', jsonString);
+      }
+    });
 
     clearInterval(intervalId);
   };
