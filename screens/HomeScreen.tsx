@@ -8,7 +8,7 @@ import {
   PermissionsAndroid,
   TouchableOpacity,
 } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Region, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
@@ -62,7 +62,7 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
     setCurrentLocation(region);
   };
 
-  const toProfile = () => navigation.navigate('History');
+  const toHistory = () => navigation.navigate('History');
 
   return (
     <>
@@ -70,11 +70,17 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
         provider={PROVIDER_GOOGLE}
         style={{ ...StyleSheet.absoluteFillObject }}
         region={currentLocation}
-        showsUserLocation
         customMapStyle={mapStyle}
         showsMyLocationButton={false}
-        onRegionChange={onRegionChange}
-      />
+        onRegionChange={onRegionChange}>
+        <Marker
+          coordinate={{
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+          }}>
+          <Ionicon name="location" size={24} />
+        </Marker>
+      </MapView>
       <View
         style={{
           position: 'absolute',
@@ -191,7 +197,7 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginLeft: 36 }} onPress={toProfile}>
+          <TouchableOpacity style={{ marginLeft: 36 }} onPress={toHistory}>
             <Ionicon name="body" size={24} color="#0E0F0F" />
           </TouchableOpacity>
         </View>
@@ -199,7 +205,5 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
     </>
   );
 };
-
-const style = StyleSheet.create({});
 
 export default HomeScreen;

@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, SectionList, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
+import { getHistories } from '../api/HistoryApi';
+
+type History = {
+  title: string;
+  data: Array<string>;
+};
+
 const HistoryScreen = ({ navigation }: any) => {
+  const initialHistory: History[] = [];
+  const [histories, setHistories]: [
+    History[],
+    React.Dispatch<React.SetStateAction<History[]>>,
+  ] = useState(initialHistory);
+
+  useEffect(() => {
+    getHistories().then((data) => setHistories(data));
+  }, []);
+
   const toHome = () => navigation.navigate('Home');
 
   return (
@@ -31,21 +48,7 @@ const HistoryScreen = ({ navigation }: any) => {
         </Text>
       </View>
       <SectionList
-        sections={[
-          { title: 'D', data: ['Devin', 'Dan', 'Dominic'] },
-          {
-            title: 'J',
-            data: [
-              'Jackson',
-              'James',
-              'Jillian',
-              'Jimmy',
-              'Joel',
-              'John',
-              'Julie',
-            ],
-          },
-        ]}
+        sections={histories}
         renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
         renderSectionHeader={({ section }) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
