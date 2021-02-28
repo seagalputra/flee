@@ -5,35 +5,28 @@ import useHistoryApi, { History } from '../hooks/useHistoryApi';
 const HistoryScreen = () => {
   const histories: History[] = useHistoryApi();
 
+  const itemStartStyle = {
+    ...styles.item,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  };
+
+  const itemEndStyle = {
+    ...styles.item,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    marginBottom: 16,
+  };
+
   return (
     <View style={styles.container}>
       <SectionList
         sections={histories}
         renderItem={({ item, index, section }) => {
           if (index === 0) {
-            return (
-              <Text
-                style={{
-                  ...styles.item,
-                  borderTopLeftRadius: 10,
-                  borderTopRightRadius: 10,
-                }}>
-                {item}
-              </Text>
-            );
-          }
-          if (index === section.data.length - 1) {
-            return (
-              <Text
-                style={{
-                  ...styles.item,
-                  borderBottomLeftRadius: 10,
-                  borderBottomRightRadius: 10,
-                  marginBottom: 16,
-                }}>
-                {item}
-              </Text>
-            );
+            return <Text style={itemStartStyle}>{item}</Text>;
+          } else if (index === section.data.length - 1) {
+            return <Text style={itemEndStyle}>{item}</Text>;
           } else {
             return <Text style={styles.item}>{item}</Text>;
           }

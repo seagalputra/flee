@@ -68,7 +68,7 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
     <>
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={{ ...StyleSheet.absoluteFillObject }}
+        style={styles.map}
         region={currentLocation}
         customMapStyle={mapStyle}
         showsMyLocationButton={false}
@@ -81,123 +81,34 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
           <Ionicon name="location" size={24} />
         </Marker>
       </MapView>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          backgroundColor: 'white',
-          height: 200,
-          width: '100%',
-          borderTopLeftRadius: 36,
-          borderTopRightRadius: 36,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.23,
-          shadowRadius: 2.62,
-          elevation: 4,
-          paddingTop: 36,
-          paddingLeft: 24,
-          paddingRight: 24,
-          paddingBottom: 24,
-        }}>
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
+      <View style={styles.menuContainer}>
+        <View style={styles.menuDetails}>
           <View>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 14, color: '#c6c6c6' }}>
-              Time
-            </Text>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 21, color: '#0E0F0F' }}>
-              12:24
-            </Text>
+            <Text style={styles.menuTitle}>Time</Text>
+            <Text style={styles.menuBody}>12:24</Text>
           </View>
-          <View
-            style={{
-              borderRightWidth: 1,
-              borderRightColor: '#efefef',
-            }}
-          />
+          <View style={styles.menuSeparator} />
           <View>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 14, color: '#c6c6c6' }}>
-              Distance
-            </Text>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 21, color: '#0E0F0F' }}>
-              13 km
-            </Text>
+            <Text style={styles.menuTitle}>Distance</Text>
+            <Text style={styles.menuBody}>13 km</Text>
           </View>
-          <View
-            style={{
-              borderRightWidth: 1,
-              borderRightColor: '#efefef',
-            }}
-          />
+          <View style={styles.menuSeparator} />
           <View>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 14, color: '#c6c6c6' }}>
-              Calories
-            </Text>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 21, color: '#0E0F0F' }}>
-              83
-            </Text>
+            <Text style={styles.menuTitle}>Calories</Text>
+            <Text style={styles.menuBody}>83</Text>
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 28,
-          }}>
-          <TouchableOpacity style={{ marginRight: 36 }}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.reloadButton}>
             <Ionicon name="reload" size={24} color="#0E0F0F" />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#0E0F0F',
-              padding: 16,
-              width: 140,
-              height: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 60,
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.23,
-              shadowRadius: 2.62,
-              elevation: 4,
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
+          <TouchableOpacity style={styles.startButtonContainer}>
+            <View style={styles.startButton}>
               <Ionicon name="play" size={24} color="#fff" />
-              <Text
-                style={{
-                  marginLeft: 8,
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                }}>
-                START
-              </Text>
+              <Text style={styles.startButtonTitle}>START</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginLeft: 36 }} onPress={toHistory}>
+          <TouchableOpacity style={styles.historyButton} onPress={toHistory}>
             <Ionicon name="body" size={24} color="#0E0F0F" />
           </TouchableOpacity>
         </View>
@@ -205,5 +116,76 @@ const HomeScreen: React.FC<any> = ({ navigation }: any) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  map: { ...StyleSheet.absoluteFillObject },
+  menuContainer: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'white',
+    height: 200,
+    width: '100%',
+    borderTopLeftRadius: 36,
+    borderTopRightRadius: 36,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    paddingTop: 36,
+    paddingLeft: 24,
+    paddingRight: 24,
+    paddingBottom: 24,
+  },
+  menuDetails: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  menuTitle: { fontWeight: 'bold', fontSize: 14, color: '#c6c6c6' },
+  menuBody: { fontWeight: 'bold', fontSize: 21, color: '#0E0F0F' },
+  menuSeparator: {
+    borderRightWidth: 1,
+    borderRightColor: '#efefef',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 28,
+  },
+  reloadButton: { marginRight: 36 },
+  startButtonContainer: {
+    backgroundColor: '#0E0F0F',
+    padding: 16,
+    width: 140,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 60,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+  },
+  startButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  startButtonTitle: {
+    marginLeft: 8,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  historyButton: { marginLeft: 36 },
+});
 
 export default HomeScreen;
