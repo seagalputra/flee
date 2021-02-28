@@ -15,6 +15,7 @@
     "@react-navigation/stack": "^5.14.3",
     "base-64": "^1.0.0",
     "events": "^3.3.0",
+    "geolib": "^3.3.1",
     "pouchdb-adapter-react-native-sqlite": "^3.0.1",
     "react": "16.13.1",
     "react-native": "0.63.4",
@@ -27,7 +28,6 @@
     "react-native-screens": "^2.18.0",
     "react-native-sqlite-2": "^3.1.1",
     "react-native-vector-icons": "^8.1.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "rxdb": "^9.15.0",
     "rxjs": "^6.6.6"
   },
