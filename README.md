@@ -29,4 +29,4 @@ It's recommend running this application into Android device because it not teste
 
 # Notes
 
-🚧 Under development
+Maybe still buggy in some cases because there's issue with GPS tracking (or maybe slowing down your device). But don't worry, it will be improved next time.
